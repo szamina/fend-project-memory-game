@@ -2,6 +2,58 @@
  * Create a list that holds all of your cards
  */
 
+ let cards = [
+   {
+     'type': 'diamond'
+   },
+   {
+     'type': 'diamond'
+   },
+   {
+     'type': 'paper-plane-o'
+   },
+   {
+     'type': 'paper-plane-o'
+   },
+   {
+     'type': 'anchor'
+   },
+   {
+     'type': 'anchor'
+   },
+   {
+     'type': 'bolt'
+   },
+   {
+     'type': 'bolt'
+   },
+   {
+     'type': 'cube'
+   },
+   {
+     'type': 'cube'
+   },
+   {
+     'type': 'leaf'
+   },
+   {
+     'type': 'leaf'
+   },
+   {
+     'type': 'bicycle'
+   },
+   {
+     'type': 'bicycle'
+   },
+   {
+     'type': 'bomb'
+   },
+   {
+     'type': 'bomb'
+   },
+ ];
+
+ shuffle(cards);
 
 /*
  * Display the cards on the page
