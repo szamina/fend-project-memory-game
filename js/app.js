@@ -55,6 +55,19 @@
 
  shuffle(cards);
 
+ let $deck = $(".deck");
+
+ for (let card of cards) {
+  $deck.append(renderCard(card));
+ }
+
+
+ function renderCard(card) {
+   return `<li class="card">
+             <i class="fa fa-${card.type}"></i>
+           </li>`;
+ }
+
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
