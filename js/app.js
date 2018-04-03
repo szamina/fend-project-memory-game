@@ -1,6 +1,13 @@
 /*
  * Create a list that holds all of your cards
  */
+ let $deck = $(".deck");
+ let memoryGame = {};
+ memoryGame.restart = function(){
+   $deck.empty();
+
+   // TODO: create new cards
+ };
 
  let cards = [
    {
@@ -55,7 +62,7 @@
 
  shuffle(cards);
 
- let $deck = $(".deck");
+
 
  for (let card of cards) {
   $deck.append(renderCard(card));
@@ -67,6 +74,11 @@
              <i class="fa fa-${card.type}"></i>
            </li>`;
  }
+
+
+
+
+$('.restart').on('click',memoryGame.restart);
 
 /*
  * Display the cards on the page
