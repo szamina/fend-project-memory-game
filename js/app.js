@@ -3,70 +3,76 @@
  */
  let $deck = $(".deck");
  let memoryGame = {};
+ memoryGame.start = function() {
+   memoryGame.createCards();
+ };
  memoryGame.restart = function(){
    $deck.empty();
-
-   // TODO: create new cards
+   memoryGame.createCards();
  };
 
- let cards = [
-   {
-     'type': 'diamond'
-   },
-   {
-     'type': 'diamond'
-   },
-   {
-     'type': 'paper-plane-o'
-   },
-   {
-     'type': 'paper-plane-o'
-   },
-   {
-     'type': 'anchor'
-   },
-   {
-     'type': 'anchor'
-   },
-   {
-     'type': 'bolt'
-   },
-   {
-     'type': 'bolt'
-   },
-   {
-     'type': 'cube'
-   },
-   {
-     'type': 'cube'
-   },
-   {
-     'type': 'leaf'
-   },
-   {
-     'type': 'leaf'
-   },
-   {
-     'type': 'bicycle'
-   },
-   {
-     'type': 'bicycle'
-   },
-   {
-     'type': 'bomb'
-   },
-   {
-     'type': 'bomb'
-   },
- ];
+ memoryGame.createCards = function(){
+   let cards = [
+     {
+       'type': 'diamond'
+     },
+     {
+       'type': 'diamond'
+     },
+     {
+       'type': 'paper-plane-o'
+     },
+     {
+       'type': 'paper-plane-o'
+     },
+     {
+       'type': 'anchor'
+     },
+     {
+       'type': 'anchor'
+     },
+     {
+       'type': 'bolt'
+     },
+     {
+       'type': 'bolt'
+     },
+     {
+       'type': 'cube'
+     },
+     {
+       'type': 'cube'
+     },
+     {
+       'type': 'leaf'
+     },
+     {
+       'type': 'leaf'
+     },
+     {
+       'type': 'bicycle'
+     },
+     {
+       'type': 'bicycle'
+     },
+     {
+       'type': 'bomb'
+     },
+     {
+       'type': 'bomb'
+     },
+   ];
 
- shuffle(cards);
+   shuffle(cards);
+
+   for (let card of cards) {
+    $deck.append(renderCard(card));
+   }
+ };
 
 
 
- for (let card of cards) {
-  $deck.append(renderCard(card));
- }
+
 
 
  function renderCard(card) {
@@ -79,6 +85,8 @@
 
 
 $('.restart').on('click',memoryGame.restart);
+
+ memoryGame.start();
 
 /*
  * Display the cards on the page
