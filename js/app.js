@@ -8,6 +8,7 @@
  };
  memoryGame.restart = function(){
    $deck.empty();
+   memoryGame.setCounter(0);
    memoryGame.createCards();
  };
 
@@ -68,6 +69,8 @@
    for (let card of cards) {
     $deck.append(renderCard(card));
    }
+
+
  };
 
 
@@ -87,6 +90,24 @@
 $('.restart').on('click',memoryGame.restart);
 
  memoryGame.start();
+
+
+
+ memoryGame.incrementMoveCounter = function(){
+   let counter = parseInt($('.moves').text());
+   counter++;
+   memoryGame.setCounter(counter);
+ };
+ memoryGame.setCounter = function(newValue) {
+   $('.moves').text(newValue);
+ };
+$('.deck').on('click', '.card',memoryGame.incrementMoveCounter);
+
+
+ /*memoryGame.restart = function(){
+   $deck.empty();
+   memoryGame.createCards();
+ };*/
 
 /*
  * Display the cards on the page
