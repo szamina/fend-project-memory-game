@@ -96,9 +96,12 @@
 
  memoryGame.start();
 
+ memoryGame.getCounter = function() {
+   return parseInt($('.moves').text());
+ };
 
  memoryGame.incrementMoveCounter = function(){
-   let counter = parseInt($('.moves').text());
+   let counter = memoryGame.getCounter();
    counter++;
    memoryGame.setCounter(counter);
  };
@@ -116,10 +119,14 @@
 
  $('.deck').on('click', '.card', function(){
   memoryGame.incrementMoveCounter();
-  let counter = parseInt($('.moves').text());
+
+  let counter =  memoryGame.getCounter();
   if(counter == 1) {
     memoryGame.startTimer();
   }
+
+  $(this).addClass("show open");
+
  });
 
 
