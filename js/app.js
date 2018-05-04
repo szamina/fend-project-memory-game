@@ -3,6 +3,7 @@
  */
  let $deck = $(".deck");
  let memoryGame = {};
+
  memoryGame.timer = new Timer();
  memoryGame.start = function() {
    memoryGame.createCards();
@@ -13,6 +14,7 @@
    memoryGame.createCards();
    memoryGame.resetTimer();
  };
+ memoryGame.previousSelectedCard = {};
 
 /**
  * original reset function of timer starts counting again, this is why I've set up reset this way
@@ -89,7 +91,7 @@
 
 
  function renderCard(card) {
-   return `<li class="card">
+   return `<li class="card" data-type="${card.type}">
              <i class="fa fa-${card.type}"></i>
            </li>`;
  }
@@ -117,17 +119,30 @@
    });
  };
 
+ memoryGame.markCardAsMatch = function($card) {
+   $card.addClass('match');
+   $card.removeClass('open show');
+ }
+
  $('.deck').on('click', '.card', function(){
   if(!$(this).hasClass("open")){
       memoryGame.incrementMoveCounter();
+      if(memoryGame.getCounter() % 2 == 0) {
+          if($(memoryGame.previousSelectedCard).data('type') == $(this).data('type')) {
+            memoryGame.markCardAsMatch($(this));
+            memoryGame.markCardAsMatch($(memoryGame.previousSelectedCard));
+          }
+      }
   }
 
-  let counter =  memoryGame.getCounter();
+  let counter = memoryGame.getCounter();
   if(counter == 1) {
     memoryGame.startTimer();
   }
 
   $(this).addClass("show open");
+
+  memoryGame.previousSelectedCard = $(this);
 
  });
 
