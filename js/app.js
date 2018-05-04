@@ -84,13 +84,7 @@
            </li>`;
  }
 
-
-
-
-$('.restart').on('click',memoryGame.restart);
-
  memoryGame.start();
-
 
 
  memoryGame.incrementMoveCounter = function(){
@@ -98,11 +92,29 @@ $('.restart').on('click',memoryGame.restart);
    counter++;
    memoryGame.setCounter(counter);
  };
+
  memoryGame.setCounter = function(newValue) {
    $('.moves').text(newValue);
  };
-$('.deck').on('click', '.card',memoryGame.incrementMoveCounter);
 
+ memoryGame.startTimer = function() {
+   var timer = new Timer();
+   timer.start();
+   timer.addEventListener('secondsUpdated', function (e) {
+        $('.timer').html(timer.getTimeValues().toString());
+   });
+ };
+
+ $('.deck').on('click', '.card', function(){
+  memoryGame.incrementMoveCounter();
+  let counter = parseInt($('.moves').text());
+  if(counter == 1) {
+    memoryGame.startTimer();
+  }
+ });
+
+
+ $('.restart').on('click',memoryGame.restart);
 
  /*memoryGame.restart = function(){
    $deck.empty();
