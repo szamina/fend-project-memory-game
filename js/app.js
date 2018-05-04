@@ -118,7 +118,9 @@
  };
 
  $('.deck').on('click', '.card', function(){
-  memoryGame.incrementMoveCounter();
+  if(!$(this).hasClass("open")){
+      memoryGame.incrementMoveCounter();
+  }
 
   let counter =  memoryGame.getCounter();
   if(counter == 1) {
