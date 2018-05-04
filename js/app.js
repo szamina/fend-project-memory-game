@@ -3,6 +3,7 @@
  */
  let $deck = $(".deck");
  let memoryGame = {};
+ memoryGame.timer = new Timer();
  memoryGame.start = function() {
    memoryGame.createCards();
  };
@@ -10,6 +11,15 @@
    $deck.empty();
    memoryGame.setCounter(0);
    memoryGame.createCards();
+   memoryGame.resetTimer();
+ };
+
+/**
+ * original reset function of timer starts counting again, this is why I've set up reset this way
+*/
+ memoryGame.resetTimer = function(){
+   memoryGame.timer.stop();
+   $('.timer').html("00:00:00");
  };
 
  memoryGame.createCards = function(){
@@ -98,10 +108,9 @@
  };
 
  memoryGame.startTimer = function() {
-   var timer = new Timer();
-   timer.start();
-   timer.addEventListener('secondsUpdated', function (e) {
-        $('.timer').html(timer.getTimeValues().toString());
+   memoryGame.timer.start();
+   memoryGame.timer.addEventListener('secondsUpdated', function (e) {
+        $('.timer').html(memoryGame.timer.getTimeValues().toString());
    });
  };
 
