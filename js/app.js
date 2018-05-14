@@ -122,7 +122,22 @@
  memoryGame.markCardAsMatch = function($card) {
    $card.addClass('match');
    $card.removeClass('open show');
- }
+ };
+
+ memoryGame.getStars = function(counter) {
+   let stars = 0;
+   if(counter <= 32) {
+     stars = 3;
+   }
+   else if(counter <= 44) {
+     stars = 2;
+   }
+   else if(counter <=64) {
+     stars = 1;
+   }
+   return stars;
+ };
+
 
  $('.deck').on('click', '.card', function(){
   // only for shown cards
@@ -138,7 +153,8 @@
                 memoryGame.timer.stop();
                 let timerStatus = $('.timer').html();
                 $('#success-modal').modal();
-                console.log(timerStatus);
+                $('#modal-step').html( memoryGame.getCounter() );
+                $('#modal-stars').html(memoryGame.getStars(memoryGame.getCounter()));
             }
           } else {
             $(this).addClass('not-match');
