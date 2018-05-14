@@ -38,42 +38,42 @@
      {
        'type': 'paper-plane-o'
      },
-     // {
-     //   'type': 'anchor'
-     // },
-     // {
-     //   'type': 'anchor'
-     // },
-     // {
-     //   'type': 'bolt'
-     // },
-     // {
-     //   'type': 'bolt'
-     // },
-     // {
-     //   'type': 'cube'
-     // },
-     // {
-     //   'type': 'cube'
-     // },
-     // {
-     //   'type': 'leaf'
-     // },
-     // {
-     //   'type': 'leaf'
-     // },
-     // {
-     //   'type': 'bicycle'
-     // },
-     // {
-     //   'type': 'bicycle'
-     // },
-     // {
-     //   'type': 'bomb'
-     // },
-     // {
-     //   'type': 'bomb'
-     // },
+     {
+       'type': 'anchor'
+     },
+     {
+       'type': 'anchor'
+     },
+     {
+       'type': 'bolt'
+     },
+     {
+       'type': 'bolt'
+     },
+     {
+       'type': 'cube'
+     },
+     {
+       'type': 'cube'
+     },
+     {
+       'type': 'leaf'
+     },
+     {
+       'type': 'leaf'
+     },
+     {
+       'type': 'bicycle'
+     },
+     {
+       'type': 'bicycle'
+     },
+     {
+       'type': 'bomb'
+     },
+     {
+       'type': 'bomb'
+     },
    ];
 
    shuffle(cards);
@@ -138,12 +138,26 @@
    return stars;
  };
 
+ memoryGame.setStars = function(stars) {
+   let starsSet = 0;
+
+   $(".stars li").removeClass('active');
+   $(".stars li").each(function(){
+     if(starsSet < stars) {
+       $(this).attr('class','active');
+       starsSet++;
+     }
+   });
+
+ }
+
 
  $('.deck').on('click', '.card', function(){
   // only for shown cards
   if(!$(this).hasClass("open")){
       $(this).addClass("show open");
       memoryGame.incrementMoveCounter();
+      memoryGame.setStars(memoryGame.getStars(memoryGame.getCounter()));
       if(memoryGame.getCounter() % 2 == 0) {
           if($(memoryGame.previousSelectedCard).data('type') == $(this).data('type')) {
             memoryGame.markCardAsMatch($(this));
@@ -181,11 +195,6 @@
 
  $('.restart').on('click',memoryGame.restart);
  $('#modal-close').on('click',memoryGame.restart);
-
- /*memoryGame.restart = function(){
-   $deck.empty();
-   memoryGame.createCards();
- };*/
 
 /*
  * Display the cards on the page

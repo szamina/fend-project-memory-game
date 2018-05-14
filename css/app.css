@@ -109,6 +109,10 @@ h1 {
     display: inline-block;
 }
 
+.score-panel .stars li.active i {
+    color: gold;
+}
+
 .score-panel .timer {
   display: inline-block;
   margin-left: 70px;
