@@ -125,12 +125,21 @@
  }
 
  $('.deck').on('click', '.card', function(){
+  // only for shown cards
   if(!$(this).hasClass("open")){
+      $(this).addClass("show open");
       memoryGame.incrementMoveCounter();
       if(memoryGame.getCounter() % 2 == 0) {
           if($(memoryGame.previousSelectedCard).data('type') == $(this).data('type')) {
             memoryGame.markCardAsMatch($(this));
             memoryGame.markCardAsMatch($(memoryGame.previousSelectedCard));
+          } else {
+            $(this).addClass('not-match');
+            $(memoryGame.previousSelectedCard).addClass('not-match');
+            setTimeout(function($currentCard, $previousCard){
+                $currentCard.removeClass('show open not-match');
+                $previousCard.removeClass('show open not-match');
+            }, 1000, $(this), $(memoryGame.previousSelectedCard));
           }
       }
   }
@@ -140,7 +149,7 @@
     memoryGame.startTimer();
   }
 
-  $(this).addClass("show open");
+
 
   memoryGame.previousSelectedCard = $(this);
 
