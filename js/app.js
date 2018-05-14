@@ -38,42 +38,42 @@
      {
        'type': 'paper-plane-o'
      },
-     {
-       'type': 'anchor'
-     },
-     {
-       'type': 'anchor'
-     },
-     {
-       'type': 'bolt'
-     },
-     {
-       'type': 'bolt'
-     },
-     {
-       'type': 'cube'
-     },
-     {
-       'type': 'cube'
-     },
-     {
-       'type': 'leaf'
-     },
-     {
-       'type': 'leaf'
-     },
-     {
-       'type': 'bicycle'
-     },
-     {
-       'type': 'bicycle'
-     },
-     {
-       'type': 'bomb'
-     },
-     {
-       'type': 'bomb'
-     },
+     // {
+     //   'type': 'anchor'
+     // },
+     // {
+     //   'type': 'anchor'
+     // },
+     // {
+     //   'type': 'bolt'
+     // },
+     // {
+     //   'type': 'bolt'
+     // },
+     // {
+     //   'type': 'cube'
+     // },
+     // {
+     //   'type': 'cube'
+     // },
+     // {
+     //   'type': 'leaf'
+     // },
+     // {
+     //   'type': 'leaf'
+     // },
+     // {
+     //   'type': 'bicycle'
+     // },
+     // {
+     //   'type': 'bicycle'
+     // },
+     // {
+     //   'type': 'bomb'
+     // },
+     // {
+     //   'type': 'bomb'
+     // },
    ];
 
    shuffle(cards);
@@ -133,6 +133,13 @@
           if($(memoryGame.previousSelectedCard).data('type') == $(this).data('type')) {
             memoryGame.markCardAsMatch($(this));
             memoryGame.markCardAsMatch($(memoryGame.previousSelectedCard));
+            let notMatchingCardCount = $('.deck li:not(.match)').length;
+            if(notMatchingCardCount == 0) {
+                memoryGame.timer.stop();
+                let timerStatus = $('.timer').html();
+                $('#success-modal').modal();
+                console.log(timerStatus);
+            }
           } else {
             $(this).addClass('not-match');
             $(memoryGame.previousSelectedCard).addClass('not-match');
