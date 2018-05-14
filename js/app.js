@@ -13,6 +13,7 @@
    memoryGame.setCounter(0);
    memoryGame.createCards();
    memoryGame.resetTimer();
+   memoryGame.setStars(3);
  };
  memoryGame.previousSelectedCard = {};
 
