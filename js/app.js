@@ -180,6 +180,7 @@
 
 
  $('.restart').on('click',memoryGame.restart);
+ $('#modal-close').on('click',memoryGame.restart);
 
  /*memoryGame.restart = function(){
    $deck.empty();
