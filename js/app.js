@@ -1,11 +1,14 @@
-// Create a list that holds all of your cards
+//setting up deck
 let $deck = $(".deck");
 let memoryGame = {};
 
+//set up timer
 memoryGame.timer = new Timer();
 memoryGame.start = function() {
     memoryGame.createCards();
 };
+
+//empty deck at restart
 memoryGame.restart = function() {
     $deck.empty();
     memoryGame.setCounter(0);
@@ -23,6 +26,7 @@ memoryGame.resetTimer = function() {
     $('.timer').html("00:00:00");
 };
 
+//creating list that contains all of the cards
 memoryGame.createCards = function() {
     let cards = [{
         'type': 'diamond'
@@ -66,18 +70,21 @@ memoryGame.createCards = function() {
 
 };
 
+//shuffle cards
 function renderCard(card) {
     return `<li class="card" data-type="${card.type}">
              <i class="fa fa-${card.type}"></i>
            </li>`;
 }
 
+//start game
 memoryGame.start();
 
 memoryGame.getCounter = function() {
     return parseInt($('.moves').text());
 };
 
+//increment or reset move counter
 memoryGame.incrementMoveCounter = function() {
     let counter = memoryGame.getCounter();
     counter++;
@@ -88,6 +95,7 @@ memoryGame.setCounter = function(newValue) {
     $('.moves').text(newValue);
 };
 
+//timer added
 memoryGame.startTimer = function() {
     memoryGame.timer.start();
     memoryGame.timer.addEventListener('secondsUpdated', function(e) {
@@ -95,11 +103,13 @@ memoryGame.startTimer = function() {
     });
 };
 
+//matching cards
 memoryGame.markCardAsMatch = function($card) {
     $card.addClass('match');
     $card.removeClass('open show');
 };
 
+//set up star rating
 memoryGame.getStars = function(counter) {
     let stars = 0;
     if (counter <= 32) {
@@ -124,8 +134,10 @@ memoryGame.setStars = function(stars) {
     });
 }
 
+/* increment move counter once a card has been clicked;
+ *
+ *set up match and not match events*/
 $('.deck').on('click', '.card', function() {
-    // only for shown cards
 
     if (!$(this).hasClass("open")) {
         $(this).addClass("show open");
@@ -141,7 +153,8 @@ $('.deck').on('click', '.card', function() {
                     let timerStatus = $('.timer').html();
                     $('#success-modal').modal();
                     $('#modal-step').html(memoryGame.getCounter());
-                    $('#modal-stars').html(memoryGame.getStars(memoryGame.getCounter()));
+                    $('#modal-stars').html(memoryGame.getStars(memoryGame.getCounter())
+                  );
                 }
             } else {
                 $(this).addClass('not-match');
@@ -164,10 +177,11 @@ $('.deck').on('click', '.card', function() {
 
 });
 
+//if restart clicked, close modal
 $('.restart').on('click', memoryGame.restart);
 $('#modal-close').on('click', memoryGame.restart);
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+//shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length,
         temporaryValue, randomIndex;
