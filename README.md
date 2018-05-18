@@ -1,20 +1,25 @@
 # Memory Game Project
 
-## Table of Contents
+This is a classical browser-based memory game with 16 cards, where you have to find the exact match of the cards.
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+## How to play
 
-## Instructions
+* click on a card and then on an other one
+* if cards match they remain flipped over, if not they are turning back
+* keep on searching for new matches and don't forget: there're only two cards shown at once, so have to have very good memory!
+* once you have found all matches, a rating window appears and tells you your results, plus you can start a new game if you wish so
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## Licence
 
-To get started, open `js/app.js` and start building out the app's functionality
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+## Resources
 
-## Contributing
+* shuffle function: http://stackoverflow.com/a/2450976
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+## Features
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+* count your moves
+* live stopwatch
+* rating system based on your moves
+* restart button
