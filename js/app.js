@@ -132,29 +132,58 @@ memoryGame.setStars = function(stars) {
             starsSet++;
         }
     });
-}
+};
+
+// converts "01:12:23" to "1 hours 12 minutes 23 seconds"
+memoryGame.convertTimerString = function(timerString) {
+    let timerWithUnits = "";
+    // splitting 01:12:32 => ["01","12","32"]
+    let chunks = timerString.split(':');
+    for (let [index, value] of chunks.entries()) {
+        // we dont't want to write out zeros
+        if (value != "00") {
+            // makes 00 => 0, 01 => 1, etc.
+            timerWithUnits += parseInt(value);
+            // adding postfix
+            if (index == 0) {
+                // hours
+                timerWithUnits += " hours ";
+            } else if (index == 1) {
+                timerWithUnits += " minutes ";
+            } else {
+                timerWithUnits += " seconds";
+            }
+        }
+    }
+    return timerWithUnits;
+};
+
 
 /* increment move counter once a card has been clicked;
  *
  *set up match and not match events*/
-$('.deck').on('click', '.card', function() {
+$deck.on('click', '.card', function() {
 
     if (!$(this).hasClass("open")) {
         $(this).addClass("show open");
         memoryGame.incrementMoveCounter();
         memoryGame.setStars(memoryGame.getStars(memoryGame.getCounter()));
+        // when every two cards were selected we should check things
         if (memoryGame.getCounter() % 2 == 0) {
             if ($(memoryGame.previousSelectedCard).data('type') == $(this).data('type')) {
+                // when the 2 flipped over cards matching (the previous and the current)
                 memoryGame.markCardAsMatch($(this));
                 memoryGame.markCardAsMatch($(memoryGame.previousSelectedCard));
+                // counting not matching cards: the cards which hasn't got .match class
                 let notMatchingCardCount = $('.deck li:not(.match)').length;
                 if (notMatchingCardCount == 0) {
                     memoryGame.timer.stop();
                     let timerStatus = $('.timer').html();
                     $('#success-modal').modal();
                     $('#modal-step').html(memoryGame.getCounter());
-                    $('#modal-stars').html(memoryGame.getStars(memoryGame.getCounter())
-                  );
+                    $('#modal-stars').html(memoryGame.getStars(memoryGame.getCounter()));
+                    $('#modal-timer').html(memoryGame.convertTimerString(timerStatus));
+
                 }
             } else {
                 $(this).addClass('not-match');
@@ -172,7 +201,7 @@ $('.deck').on('click', '.card', function() {
         memoryGame.startTimer();
     }
 
-
+    // everyting is done: the current card will be the previous card in the next round
     memoryGame.previousSelectedCard = $(this);
 
 });
@@ -183,7 +212,7 @@ $('#modal-close').on('click', memoryGame.restart);
 
 //shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length,
+    let currentIndex = array.length,
         temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
